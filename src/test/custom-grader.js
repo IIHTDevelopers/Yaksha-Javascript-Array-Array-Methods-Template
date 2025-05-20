@@ -73,7 +73,7 @@ function writeOutputFiles(result, fileType) {
         xml: "./yaksha-test-cases.xml"
     };
 
-    let resultStatus = result.status === 'Pass' ? 'PASS' : 'FAIL';
+    let resultStatus = result.status === 'Passed' ? 'PASS' : 'FAIL';
     let output = `${result.methodName}=${resultStatus}\n`;
 
     let outputFilePath = outputFiles[fileType];
@@ -84,7 +84,7 @@ function writeOutputFiles(result, fileType) {
 
 // Function to check if arrays are used correctly
 function checkArrayUsage(ast) {
-    let result = 'Pass';
+    let result = 'Passed';
     let feedback = [];
     let arrayUsed = false;
 
@@ -95,7 +95,7 @@ function checkArrayUsage(ast) {
     });
 
     if (!arrayUsed) {
-        result = 'Fail';
+        result = 'Failed';
         feedback.push("You must use an array.");
     }
 
@@ -106,7 +106,7 @@ function checkArrayUsage(ast) {
         'ArrayUsage',
         'functional',
         1,
-        result === 'Pass' ? 1 : 0,
+        result === 'Passed' ? 1 : 0,
         result,
         true,
         feedback.join(', ')
@@ -115,7 +115,7 @@ function checkArrayUsage(ast) {
 
 // Function to check if array methods are used correctly (with or without variable assignment)
 function checkArrayMethodUsage(ast) {
-    let result = 'Pass';
+    let result = 'Passed';
     let feedback = [];
     let arrayMethodsUsed = { push: false, pop: false, shift: false, unshift: false };
 
@@ -159,7 +159,7 @@ function checkArrayMethodUsage(ast) {
     // Check if each array method has been used
     for (let method in arrayMethodsUsed) {
         if (!arrayMethodsUsed[method]) {
-            result = 'Fail';
+            result = 'Failed';
             feedback.push(`You must use the ${method} method on the array.`);
         }
     }
@@ -171,7 +171,7 @@ function checkArrayMethodUsage(ast) {
         'ArrayMethodUsage',
         'functional',
         1,
-        result === 'Pass' ? 1 : 0,
+        result === 'Passed' ? 1 : 0,
         result,
         true,
         feedback.join(', ')
@@ -180,7 +180,7 @@ function checkArrayMethodUsage(ast) {
 
 // Function to check if array manipulation is done correctly
 function checkArrayManipulation(ast) {
-    let result = 'Pass';
+    let result = 'Passed';
     let feedback = [];
     let manipulationCorrect = false;
 
@@ -197,7 +197,7 @@ function checkArrayManipulation(ast) {
     });
 
     if (!manipulationCorrect) {
-        result = 'Fail';
+        result = 'Failed';
         feedback.push("You must manipulate the array correctly and log or store the result.");
     }
 
@@ -208,7 +208,7 @@ function checkArrayManipulation(ast) {
         'ArrayManipulation',
         'functional',
         1,
-        result === 'Pass' ? 1 : 0,
+        result === 'Passed' ? 1 : 0,
         result,
         true,
         feedback.join(', ')
@@ -254,7 +254,7 @@ function gradeAssignment() {
         console.log(resultsToSend);
 
         // Log the test result in yellow for pass and red for fail using ANSI codes
-        if (testCaseResult.status === 'Pass') {
+        if (testCaseResult.status === 'Passed') {
             console.log(`\x1b[33m${testCaseResult.methodName}: Pass\x1b[0m`); // Yellow for pass
         } else {
             console.log(`\x1b[31m${testCaseResult.methodName}: Fail\x1b[0m`); // Red for fail
